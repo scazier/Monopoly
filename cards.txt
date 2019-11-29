@@ -1,0 +1,9 @@
+#The structure is the following
+#question,idBox, steps,money,goInJail<-1/0/1>
+Community
+	Vous avez volé, allez en Prison|0,0,0,1
+	Les impôts sont là, payer 75€|0,0,-75,0
+Chance
+	Vous sortez de prison|0,0,0,1
+	Vous gagnez 200€|0,0,200,0
+	Aller sur la case Départ|1,0,0,0

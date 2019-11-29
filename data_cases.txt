@@ -1,0 +1,42 @@
+id,name,basic_price,no_house,1_Renthouse,2_Renthouses,3_Renthouses,4_Renthouses,hotel, price_house, price_hotel
+#https://ourmonopoly.fandom.com/fr/wiki/Cat%C3%A9gorie:Propri%C3%A9t%C3%A9s
+0,Départ
+1,Boulevard de BelleVille,60,brown,2,10,30,90,160,250,50,50
+2,Caisse de communauté
+3,Rue LeCourbe,60,brown,4,20,60,180,320,450,50,50
+4,Impôts sur le revenu,200
+5,Gare Montparnasse,200
+6,Rue de Vaugirard,100,sky,6,30,90,270,400,550,50,50
+7,Carte Chance
+8,Rue de Courcelles, 100,sky,6,30,90,270,400,550,50,50
+9,Avenue de la République,120,sky,8,40,100,300,450,600,50,50
+10,Prison
+11,Boulevard de la Villette,140,pink,10,50,150,450,625,750,100,100
+12,Compagnie d'électricité, 150
+13,Avenue de Neuilly,140,pink,10,50,150,450,625,750,100,100
+14,Rue de Paradis,160,pink,14,70,200,550,750,950,100,100
+15,Gare de Lyon,200
+16,Avenue Mozart,180,orange,14,70,200,550,750,950,100,100
+17,Caisse de communauté
+18,Boulevard Saint-Michel,180,orange,14,70,200,550,750,950,100,100
+19,Place Pigalle,200,orange,16,80,220,600,800,1000,100,100
+20,Parc Gratuit
+21,Avenue Matignon,220,red,18,90,250,700,875,1050,150,150
+22,Carte Chance
+23,Boulevard MalesHerbes,220,red,18,90,250,700,875,1050,150,150
+24,Avenue Henri-Martin,240,red,20,100,300,750,925,1100,150,150
+25,Gare du Nord,200
+26,Faubourg Saint-Honoré,260,yellow,22,110,330,800,975,1150,150,150
+27,Place de la Bourse,260,yellow,22,110,330,800,975,1150,150,150
+28,Compagnie des eaux,150
+29,Rue la Fayette,280,yellow,24,120,360,850,1025,1200,150,150
+30,Allez en Prison
+31,Avenue de Breteuil,300,green,26,130,390,900,1100,1275,200,200
+32,Avenue Foch,300,green,26,130,390,900,1100,1275,200,200
+33,Caisse de communauté
+34,Boulevard des capucines,320,green,28,150,450,1000,1200,1400,200,200
+35,Gare Saint-Lazare
+36,Carte Chance
+37,Avenue des Champs-Élysées,350,blue,35,175,500,1100,1300,1500,200,200
+38,Taxe de Luxe,100
+39,Rue de la Paix,400,blue,50,200,600,1400,1700,2000,200,200
