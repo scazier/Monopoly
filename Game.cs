@@ -139,7 +139,7 @@ namespace Monopoly
                     String tmpName = Console.ReadLine();
                     names.Add(tmpName);
                 }
-
+                Console.Clear();
                 return createPlayers(nb_players, names);
             }
 
@@ -172,13 +172,33 @@ namespace Monopoly
                 actualPlayer.next = firstPlayer;
                 return firstPlayer;
             }
+
+            public static String FindNameByID(Street tmpBoard, int id)
+            {
+                while (tmpBoard.ID != id)
+                {
+                    tmpBoard = tmpBoard.next;
+                }
+                return tmpBoard.Name;
+            }
     }
 
     public class GameView
     {
-        public void displayGame()
+        private String view;
+
+        public String View
         {
-            String game =
+            get { return this.view; }
+            set { this.view = value; }
+        }
+
+        public GameView()
+        {
+            this.view = "";
+        }
+
+        String baseView =
             "_____________________________________________________________________________________________________________________________________________________________________________________________\n"+
             "|                |                |                |                |                |                |                |                |                |                |                 |\n"+
             "|      Parc      |     Avenue     |     Chance     |   Boulevard    |     Avenue     |     Gare du    |    Faubourg    |    Place de    | Compagnie des  |     Rue la     | Allez en Prison |\n"+
@@ -231,63 +251,139 @@ namespace Monopoly
             "|                |                |                |                |                |                |                |                |                |                |                 |\n"+
             "|                |                |                |                |                |                |                |                |                |                |                 |\n"+
             "|                |      120 €     |      100 €     |                |      100 €     |      200 €     |      200 €     |       60 €     |                |      60 €      |                 |\n"+
-            "|________________|________________|________________|________________|________________|________________|________________|________________|________________|________________|_________________|\n";
-            Console.WriteLine(game);
-            // String game =
-            // "_______________________________________________________________________________________________________________________________________________________________________________________________________________________________________\n"+
-            // "|                    |                    |                    |                    |                    |                    |                    |                    |                    |                    |                    |\n"+
-            // "|        Parc        |       Avenue       |       Chance       |     Boulevard      |       Avenue       |       Gare du      |      Faubourg      |      Place de      |   Compagnie des    |       Rue la       |   Allez en Prison  |\n"+
-            // "|       Gratuit      |      Matignon      |                    |    MalesHerbes     |    Henri-Martin    |        Nord        |    Saint-Honoré    |      la Bourse     |        eaux        |       Fayette      |                    |\n"+
-            // "|____________________|____________________|____________________|____________________|____________________|____________________|____________________|____________________|____________________|____________________|____________________|\n"+
-            // "|                    |                    |                    |                    |                    |                    |                    |                    |                    |                    |                    |\n"+
-            // "|                    |                    |                    |                    |                    |                    |                    |                    |                    |                    |                    |\n"+
-            // "|                    |        220 €       |                    |        220 €       |        240 €       |        200 €       |        260 €       |        260 €       |        150 €       |        280 €       |                    |\n"+
-            // "|____________________|____________________|____________________|____________________|____________________|____________________|____________________|____________________|____________________|____________________|____________________|\n"+
-            // "|                    |____________________________                                                                                                                                  ______________________________|                    |\n"+
-            // "|                    |        Place Pigalle       |                                                                                                                                 |     Avenue de Breteuil      |                    |\n"+
-            // "|        200 €       |____________________________|                                                                                                                                 |_____________________________|        300 €       |\n"+
-            // "|____________________|                                                                                                                                                                                            |____________________|\n"+
-            // "|                    |____________________________                                                                                                                                   _____________________________|                    |\n"+
-            // "|                    |   Boulevard Saint-Michel   |                                                                                                                                 |         Avenue Foch         |                    |\n"+
-            // "|        180 €       |____________________________|                                                                                                                                 |_____________________________|        300 €       |\n"+
-            // "|____________________|                                                                                                                                                                                            |____________________|\n"+
-            // "|                    |____________________________                                                                                                                                   _____________________________|                    |\n"+
-            // "|                    |     Caisse de communauté   |                                                                                                                                 |     Caisse de communauté    |                    |\n"+
-            // "|                    |____________________________|                                                                                                                                 |_____________________________|                    |\n"+
-            // "|____________________|                                                                                                                                                                                            |____________________|\n"+
-            // "|                    |____________________________                                                                                                                                   _____________________________|                    |\n"+
-            // "|                    |        Avenue Mozart       |                                                                                                                                 |   Boulevard des capucines   |                    |\n"+
-            // "|        180 €       |____________________________|                                                                                                                                 |_____________________________|        300 €       |\n"+
-            // "|____________________|                                                                                                                                                                                            |____________________|\n"+
-            // "|                    |____________________________                                                                                                                                   _____________________________|                    |\n"+
-            // "|                    |          Gare Lyon         |                                                                                                                                 |      Gare Saint-Lazare      |                    |\n"+
-            // "|        200 €       |____________________________|                                                                                                                                 |_____________________________|        200 €       |\n"+
-            // "|____________________|                                                                                                                                                                                            |____________________|\n"+
-            // "|                    |____________________________                                                                                                                                   _____________________________|                    |\n"+
-            // "|                    |       Rue de Paradis       |                                                                                                                                 |           Chance            |                    |\n"+
-            // "|        160 €       |____________________________|                                                                                                                                 |_____________________________|                    |\n"+
-            // "|____________________|                                                                                                                                                                                            |____________________|\n"+
-            // "|                    |____________________________                                                                                                                                   _____________________________|                    |\n"+
-            // "|                    |      Avenue de Neuilly     |                                                                                                                                 |  Avenue des Champs-Elysées  |                    |\n"+
-            // "|        140 €       |____________________________|                                                                                                                                 |_____________________________|        350 €       |\n"+
-            // "|____________________|                                                                                                                                                                                            |____________________|\n"+
-            // "|                    |____________________________                                                                                                                                   _____________________________|                    |\n"+
-            // "|                    |   Compagnie d'électricité  |                                                                                                                                 |        Taxe de Luxe         |                    |\n"+
-            // "|        150 €       |____________________________|                                                                                                                                 |_____________________________|        100 €       |\n"+
-            // "|____________________|                                                                                                                                                                                            |____________________|\n"+
-            // "|                    |____________________________                                                                                                                                   _____________________________|                    |\n"+
-            // "|                    |  Boulevard de la Villette  |                                                                                                                                 |       Rue de la Paix        |                    |\n"+
-            // "|        140 €       |____________________________|                                                                                                                                 |_____________________________|        400 €       |\n"+
-            // "|____________________|____________________________________________________________________________________________________________________________________________________________________________________________|____________________|\n"+
-            // "|                    |                    |                    |                    |                    |                    |                    |                    |                    |                    |                    |\n"+
-            // "|        Prison      |     Avenue de      |      Rue des       |       Chance       |       Rue de       |        Gare        |        Impôt       |         Rue        |       Caisse       |    Boulevard de    |       Départ       |\n"+
-            // "|                    |   la République    |     Courcelles     |                    |      Vaugirard     |    Montparnasse    |    sur le revenu   |       LeCourbe     |    de communauté   |     BelleVille     |         <--        |\n"+
-            // "|____________________|____________________|____________________|____________________|____________________|____________________|____________________|____________________|____________________|____________________|____________________|\n"+
-            // "|                    |                    |                    |                    |                    |                    |                    |                    |                    |                    |                    |\n"+
-            // "|                    |                    |                    |                    |                    |                    |                    |                    |                    |                    |                    |\n"+
-            // "|                    |        120 €       |        100 €       |                    |        100 €       |        200 €       |        200 €       |         60 €       |                    |         60 €       |                    |\n"+
-            // "|____________________|____________________|____________________|____________________|____________________|____________________|____________________|____________________|____________________|____________________|____________________|\n";
-            //
+            "|________________|________________|________________|________________|________________|________________|________________|________________|________________|________________|_________________|";
+
+
+        public static String getHouseHotel(Street tmpBoard, int id)
+        {
+            String output = "";
+            while (tmpBoard.ID != id)
+            {
+                tmpBoard = tmpBoard.next;
+            }
+            if (tmpBoard.Nb_house != -1)
+            {
+                output = ", House(s): "+tmpBoard.Nb_house + ", Hotel: " + tmpBoard.Hotel;
+            }
+            return output;
+        }
+
+        public void applyPosition(Player pl)
+        {
+            Player tmpPlayer = pl;
+            //String fullGame = baseView;
+            int id_start = pl.ID;
+            int cptLine = 0;
+            String[] game = baseView.Split('\n');
+
+            do
+            {
+                String playerAttribute = "Player "+tmpPlayer.ID+"-> Name: "+tmpPlayer.Name+" - Pawn: "+tmpPlayer.emojiPawn()+" - Money: "+tmpPlayer.Money;
+                game[9+tmpPlayer.ID] = game[9+tmpPlayer.ID].Substring(0,55) + playerAttribute +
+                                        game[9+tmpPlayer.ID].Substring(55 + playerAttribute.Length, game[13+tmpPlayer.ID].Length - 55 - playerAttribute.Length);
+
+
+                if (tmpPlayer.Id_purchased.Count != 0)
+                {
+                    //The purchased boxes will are displayed on two columns
+                    int index = 0;
+                    while (index < tmpPlayer.Id_purchased.Count)
+                    {
+                        String properties = Game.FindNameByID(tmpPlayer.Position, tmpPlayer.Id_purchased[index]) + " -> Owner: " + tmpPlayer.emojiPawn() + getHouseHotel(tmpPlayer.Position, tmpPlayer.Id_purchased[index]);
+                        game[16 + cptLine] = game[16 + cptLine].Substring(0,54) + properties +
+                                             game[16 + cptLine].Substring(54+properties.Length, game[16 + cptLine].Length - properties.Length - 54);
+                        index++;
+                        cptLine++;
+                    }
+                }
+
+                tmpPlayer = tmpPlayer.next;
+            } while (tmpPlayer.ID != id_start);
+
+
+            do
+            {
+                // Display yhr position of the players
+                int pos = tmpPlayer.Position.ID;
+                int idPlayer = tmpPlayer.ID;
+                int viewLine = 0;
+                int idCharLine = 3 + (idPlayer - 1) * 2;
+
+                if (pos >= 1 && pos <= 11)
+                {
+                    viewLine = 50;
+                    idCharLine += 1 + (11 - pos) * 17;
+                }
+
+                if (pos >= 21 && pos <= 31)
+                {
+                    viewLine = 6;
+                    idCharLine += 1 + (pos - 21) * 17;
+                }
+
+                if (pos > 11 && pos < 21 || pos > 31 && pos <= 40)
+                {
+                    if (pos > 31 && pos <= 40) { idCharLine += 10 * 17; }
+
+                    switch (pos)
+                    {
+                        case 12:
+                        case 40:
+                            viewLine = 42;
+                            break;
+
+                        case 13:
+                        case 39:
+                            viewLine = 38;
+                            break;
+
+                        case 14:
+                        case 38:
+                            viewLine = 34;
+                            break;
+
+                        case 15:
+                        case 37:
+                            viewLine = 30;
+                            break;
+
+                        case 16:
+                        case 36:
+                            viewLine = 26;
+                            break;
+
+
+                        case 17:
+                        case 35:
+                            viewLine = 22;
+                            break;
+
+                        case 18:
+                        case 34:
+                            viewLine = 18;
+                            break;
+
+                        case 19:
+                        case 33:
+                            viewLine = 14;
+                            break;
+
+                        case 20:
+                        case 32:
+                            viewLine = 10;
+                            break;
+                    }
+                }
+
+                game[viewLine] = game[viewLine].Substring(0, idCharLine-1) + tmpPlayer.emojiPawn() + game[viewLine].Substring(idCharLine+1, game[viewLine].Length - idCharLine - 1);
+                tmpPlayer = tmpPlayer.next;
+            } while (tmpPlayer.ID != id_start);
+
+            for (int i=0; i<game.Length; i++)
+            {
+                Console.WriteLine(game[i]);
+            }
+            //return game;
         }
     }
 
@@ -318,7 +414,7 @@ namespace Monopoly
             }
         }
 
-        public static int Dice(Player pl)
+        public static int[] Dice(Player pl)
         {
             /*
              * Simule the roll of dices and return the number of boxes to go
@@ -335,7 +431,7 @@ namespace Monopoly
             }
             pl.ThrownDice.Enqueue(actualRound);
 
-            return dice1+dice2;
+            return new int[] {dice1, dice2};
         }
 
         public static bool checkLastThrown(Player pl)
@@ -442,14 +538,16 @@ namespace Monopoly
                 int nbTrainStation = 1;
                 int id_start = tmpBoard.ID;
 
-                while (tmpBoard.next.ID != id_start)
+                do
                 {
                     // We search all the train stations the owner has
                     if (tmpBoard.Name.Substring(0,4).Equals("Gare") && tmpBoard.Id_buyer == idOwner)
                     {
                         nbTrainStation++;
                     }
-                }
+                    tmpBoard = tmpBoard.next;
+                }while (tmpBoard.ID != id_start);
+
                 switch (nbTrainStation)
                 {
                     case 1:
@@ -478,10 +576,11 @@ namespace Monopoly
                 while (tmpBoard.next.ID != id_start)
                 {
                     // We search all the train stations the owner has
-                    if (tmpBoard.Name.Substring(0,4).Equals("Gare") && tmpBoard.Id_buyer == idOwner)
+                    if (tmpBoard.Name.Substring(0,4).Equals("Compagnie") && tmpBoard.Id_buyer == idOwner)
                     {
                         nbPublicCompany++;
                     }
+                    tmpBoard = tmpBoard.next;
                 }
 
                 if (nbPublicCompany == 1) { amount = 4 * numberDice; }
@@ -504,64 +603,94 @@ namespace Monopoly
             Player actualPlayer = pl; // Peut être deep copy à faire
             Street actualPosition = actualPlayer.Position;
 
+
             if (actualPosition.Basic_price != -1)
             {
-                // If the player can buy this box
-                if (!actualPlayer.FirstRound)
+                if (actualPosition.Name.Substring(0, 6).Equals("Impôts") || actualPosition.Name.Substring(0, 4).Equals("Taxe"))
                 {
-                    // The player cannot buy on the first round
-                    if (actualPosition.Id_buyer == 0)
+                    actualPlayer.Money -= actualPosition.Basic_price;
+                }
+                else
+                {
+                    // If the player can buy this box
+                    if (!actualPlayer.FirstRound)
                     {
-                        Console.Write("Do you want to buy this property? [y/n]");
-                        char action = Convert.ToChar(Console.ReadLine());
-                        // If id_buyer = 0, nobody own this box
-                        if (action.Equals('y') || action.Equals('Y'))
+                        // The player cannot buy on the first round
+                        if (actualPosition.Id_buyer == 0)
                         {
-                            actualPlayer.Buy();
-                        }
-                    }
-                    else
-                    {
-                        if (actualPosition.Id_buyer == actualPlayer.ID)
-                        {
-                            // If the actual player bought thi box before
-                            if (!actualPosition.Name.Substring(0,4).Equals("Gare") && !actualPosition.Name.Substring(0,6).Equals("Impôts") &&  !actualPosition.Name.Substring(0,4).Equals("Taxe") && !actualPosition.Name.Substring(0,9).Equals("Compagnie"))
+                            char action = 'a';
+                            while (!action.Equals('y') && !action.Equals('Y') && !action.Equals('n') && !action.Equals('N'))
                             {
-                                Console.Write("Do you want to add an element (house, hotel)? [y/n]");
-                                char action = Convert.ToChar(Console.ReadLine());
-                                if (action.Equals('y') || action.Equals('Y'))
-                                {
-                                    Console.WriteLine("1 - Add House\n2 - Replace by Hotel\0 - Continue");
-                                    int answer = Convert.ToInt32(Console.ReadLine());
-                                    switch (answer)
-                                    {
-                                        case 1:
-                                            actualPlayer.AddHouse();
-                                            break;
-
-                                        case 2:
-                                            actualPlayer.AddHotel();
-                                            break;
-                                    }
-                                }
+                                Console.Write("Do you want to buy this property? [y/n]");
+                                String input = Console.ReadLine();
+                                if (input.Length == 1) { action = Convert.ToChar(input); }
+                                // If id_buyer = 0, nobody own this box
                             }
+
+                            if (action.Equals('y') || action.Equals('Y'))
+                            {
+                                actualPlayer.Buy();
+                            }
+
                         }
                         else
                         {
-                            // loyer don't forget colors
-                            if (actualPosition.Nb_house != -1)
+                            if (actualPosition.Id_buyer == actualPlayer.ID)
                             {
-                                actualPlayer = PayRent(actualPlayer, actualPlayer.Position.Id_buyer, "Street");
+                                // If the actual player bought thi box before
+                                if (!actualPosition.Name.Substring(0,4).Equals("Gare") && !actualPosition.Name.Substring(0,6).Equals("Impôts") &&  !actualPosition.Name.Substring(0,4).Equals("Taxe") && !actualPosition.Name.Substring(0,9).Equals("Compagnie"))
+                                {
+                                    char actionAdd = 'a';
+                                    while (!actionAdd.Equals('y') && !actionAdd.Equals('Y') && !actionAdd.Equals('n') && !actionAdd.Equals('N'))
+                                    {
+                                        Console.Write("Do you want to add an element (house, hotel)? [y/n]");
+                                        String input = Console.ReadLine();
+                                        if (input.Length == 1) { actionAdd = Convert.ToChar(input); }
+                                    }
+
+                                    if (actionAdd.Equals('y') || actionAdd.Equals('Y'))
+                                    {
+                                        int answer = -1;
+                                        while (answer != 0 && answer != 1 && answer != 2)
+                                        {
+                                            Console.WriteLine("n0 - Continue\n1 - Add House\n2 - Replace by Hotel");
+                                            Console.WriteLine(">>> ");
+                                        }
+                                        answer = Convert.ToInt32(Console.ReadLine());
+                                        switch (answer)
+                                        {
+                                            case 0:
+                                                break;
+
+                                            case 1:
+                                                actualPlayer.AddHouse();
+                                                Console.WriteLine("House added on " + actualPlayer.Position.Name);
+                                                break;
+
+                                            case 2:
+                                                actualPlayer.AddHotel();
+                                                Console.WriteLine("Hotel added on " + actualPlayer.Position.Name);
+                                                break;
+                                        }
+                                    }
+                                }
                             }
                             else
                             {
-                                if (actualPosition.Name.Substring(0,4).Equals("Gare"))
+                                if (actualPosition.Nb_house != -1)
                                 {
-                                    actualPlayer = PayRent(actualPlayer, actualPlayer.Position.Id_buyer, "Train");
+                                    actualPlayer = PayRent(actualPlayer, actualPlayer.Position.Id_buyer, "Street");
                                 }
-                                else if (actualPosition.Name.Substring(0,9).Equals("Compagnie"))
+                                else
                                 {
-                                    actualPlayer = PayRent(actualPlayer, actualPlayer.Position.Id_buyer, "Company", numberDice);
+                                    if (actualPosition.Name.Substring(0,4).Equals("Gare"))
+                                    {
+                                        actualPlayer = PayRent(actualPlayer, actualPlayer.Position.Id_buyer, "Train");
+                                    }
+                                    else if (actualPosition.Name.Substring(0,9).Equals("Compagnie"))
+                                    {
+                                        actualPlayer = PayRent(actualPlayer, actualPlayer.Position.Id_buyer, "Company", numberDice);
+                                    }
                                 }
                             }
                         }
@@ -572,15 +701,17 @@ namespace Monopoly
             {
                 if (actualPosition.Name.Equals("Caisse de communauté"))
                 {
-                    // Communaute
+                    actualPlayer.Card("community");
                 }
                 else if (actualPosition.Name.Equals("Chance"))
                 {
-                    // CHance
+                    actualPlayer.Card("chance");
+
                 }
                 else if (actualPosition.Name.Equals("Allez en Prison"))
                 {
                     actualPlayer.GoToJail();
+                    actualPlayer.InJail = true;
                 }
                 else if (actualPosition.Name.Equals("Parc Gratuit"))
                 {
@@ -589,9 +720,74 @@ namespace Monopoly
             }
         }
 
-        public void updateView()
+        public Player updatePlayers(Player pl, int idPlayer)
         {
-            this.view.displayGame();
+            Player tmpPlayer = pl;
+
+            while (tmpPlayer.next.ID != idPlayer)
+            {
+                tmpPlayer = tmpPlayer.next;
+            }
+
+            tmpPlayer.next = tmpPlayer.next.next;
+            return tmpPlayer;
+        }
+
+        public void Round(Player pl)
+        {
+            int[] resultDices = {1, 0};
+            int cptNumberDouble = 0;
+
+            do
+            {
+                if (cptNumberDouble == 3)
+                {
+                    pl.GoToJail();
+                    pl.InJail = true;
+                }
+
+                if ( resultDices[0] == resultDices[1])
+                {
+                    cptNumberDouble++;
+                }
+                resultDices = Dice(pl);
+                int sumDices = resultDices[0]+resultDices[1];
+                Console.WriteLine("Result Dice of "+pl.Name+": "+resultDices[0]+" and "+resultDices[1]);
+                pl.Move(sumDices);
+                if (pl.Position.Basic_price != -1 && !pl.FirstRound) { displayGame(); }
+                Action(pl, sumDices);
+                displayGame();
+
+                // Chance card and jail
+
+                if (pl.Money <= 0) { updatePlayers(pl, pl.ID); }
+
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadLine();
+            }while (resultDices[0] == resultDices[1]);
+        }
+
+        public void playGame()
+        {
+            while (this.model.Players.next.ID != this.model.Players.ID)
+            {
+                if (!this.model.Players.InJail)
+                {
+                    // while there is more than one player, we continue the game
+                    Round(this.model.Players);
+                    this.model.Players = this.model.Players.next;
+                }
+                else
+                {
+                    this.model.Players.InJail = false;
+                }
+            }
+            Console.WriteLine("Winner is: " + this.model.Players.Name);
+        }
+
+        public void displayGame()
+        {
+            this.view.applyPosition(this.model.Players);
         }
     }
 }

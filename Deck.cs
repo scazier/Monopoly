@@ -29,7 +29,7 @@ public class Content
 
     public String toString()
     {
-        String output = "[ Request: "+this.request+", Action: "+this.action+"]";
+        String output = "[ Request: "+this.request+"\t => \tAction: "+this.action+"]";
         return output;
     }
 }
@@ -53,7 +53,7 @@ public class Deck
         set { this.chance = value; }
     }
 
-    public int Id { get; set; }
+    public int ID { get; set; }
 
 
     private static Deck ReadCards(Deck deck, bool readCommunity=false, bool readChance=false)
@@ -123,15 +123,15 @@ public class Deck
         return deck;
     }
 
-    public Deck()
+    private Deck()
     {
-        Id += 1;
+        ID += 1;
         this.community = new Stack<Content>();
         this.chance = new Stack<Content>();
 
     }
 
-    public static Deck CreateDeck()
+    public static Deck ReadDeck()
     {
         if (_object == null)
         {
@@ -153,14 +153,14 @@ public class Deck
 
         foreach (Content obj in this.community)
         {
-            output += "\t"+obj.toString();
+            output += "\t"+obj.toString()+"\n";
         }
 
         output += "\nChance cards:\n";
 
         foreach (Content obj in this.chance)
         {
-            output += "\t"+obj.toString();
+            output += "\t"+obj.toString()+"\n";
         }
 
         return output;

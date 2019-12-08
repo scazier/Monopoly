@@ -10,34 +10,27 @@ namespace Monopoly
         public static void Start()
         {
             Console.WriteLine("\nFrise Début\n");
-            Game model = new Game();
+            Game model = new Game(); // Creation of the board and the players
             GameView view = new GameView();
             GameController controller = new GameController(model, view);
 
             Street Board = model.Board;
             Player players = model.Players;
             Banker banker = Banker.CreateBanker();
+            Deck deck = Deck.ReadDeck();
 
-            //banker.Operations.Add(new Exchange(2, "-400"));
-            //Console.WriteLine("banker: "+banker.toString());
+            //Console.WriteLine(deck.toString());
 
             controller.initializePlayers();
 
-            players.Move(1);
-            players.Buy();
-
-            //Console.WriteLine(players.toString()+"\n");
-
-            players = players.next;
-            players.Move(1);
-            players.GoToJail();
-            //players = PayRent(players, players.Position.Id_buyer, "Street");
-            //Console.WriteLine(players.toString());
+            players.displayAllPlayers();
+            Console.WriteLine("This is the list of the players!");
+            Console.WriteLine("Press any key to start the game...");
+            controller.displayGame();
+            Console.ReadLine();
             Console.Clear();
-            view.displayGame();
-            //Cards card = Cards.GetCards();
-            //Console.WriteLine(card.toString());
 
+            controller.playGame();
         }
 
 
