@@ -70,7 +70,7 @@ To run the game just exectue the following line:
 dotnet run
 ```
 
-But before running the game launch a test to know if the code works:
+In this project there is some unit tests on some main functions, you check if the code works with:
 ```
 dotnet run --test
 ```
